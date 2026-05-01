@@ -1,0 +1,21 @@
+export const successResponse = (
+  message: string,
+  data: unknown = null
+) => {
+  return {
+    success: true,
+    message,
+    data,
+  };
+};
+
+export const errorResponse = (
+  message: string,
+  error: unknown = null
+) => {
+  return {
+    success: false,
+    message,
+    error,
+  };
+};
