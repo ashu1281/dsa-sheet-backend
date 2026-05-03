@@ -5,6 +5,10 @@ import {
     Typography,
 } from "@mui/material";
 
+import {
+    useTheme,
+} from "@mui/material/styles";
+
 interface Props {
     userName: string;
 
@@ -22,6 +26,11 @@ const HeroCard = ({
     hard,
 }: Props) => {
 
+    const theme = useTheme();
+
+    const isDark =
+        theme.palette.mode === "dark";
+
     return (
         <Box
             sx={{
@@ -35,11 +44,14 @@ const HeroCard = ({
 
                 mb: 4,
 
-                border:
-                    "1px solid rgba(255,255,255,0.08)",
+                border: `1px solid ${theme.palette.divider}`,
 
-                background:
-                    "linear-gradient(135deg, #050816 0%, #0b1023 100%)",
+                background: isDark
+                    ? "linear-gradient(135deg, #050816 0%, #0b1023 100%)"
+                    : "linear-gradient(135deg, #ffffff 0%, #f3f4f6 100%)",
+
+                transition:
+                    "all 0.3s ease",
 
                 "&::before": {
                     content: '""',
@@ -50,12 +62,18 @@ const HeroCard = ({
 
                     backgroundImage: `
             linear-gradient(
-              rgba(255,255,255,0.06) 1px,
+              ${isDark
+                            ? "rgba(255,255,255,0.06)"
+                            : "rgba(0,0,0,0.04)"
+                        } 1px,
               transparent 1px
             ),
             linear-gradient(
               90deg,
-              rgba(255,255,255,0.06) 1px,
+              ${isDark
+                            ? "rgba(255,255,255,0.06)"
+                            : "rgba(0,0,0,0.04)"
+                        } 1px,
               transparent 1px
             )
           `,
@@ -77,12 +95,18 @@ const HeroCard = ({
             >
 
                 <Typography
-                    sx={{ fontVariant: 'h3', fontWeight: 800 }}
                     gutterBottom
+                    sx={{
+                        fontSize: {
+                            xs: "2rem",
+                            md: "3rem",
+                        },
+                        fontVariant: 'h3', fontWeight: 800
+                    }}
                 >
                     <Box
                         component="span"
-                        color="#ff6b4a"
+                        color="primary.main"
                     >
                         DSA Sheet
                     </Box>{" "}

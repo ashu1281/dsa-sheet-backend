@@ -2,9 +2,9 @@ import {
   Checkbox,
   Chip,
   Link,
-  Stack,
   TableCell,
   TableRow,
+  Tooltip,
 } from "@mui/material";
 
 import {
@@ -13,7 +13,9 @@ import {
   PlayCircle,
 } from "@mui/icons-material";
 
-import type { Question } from "../../types/dsa.types";
+import type {
+  Question,
+} from "../../types/dsa.types";
 
 interface Props {
   question: Question;
@@ -50,7 +52,59 @@ const QuestionRow = ({
         {question.name}
       </TableCell>
 
+      <TableCell align="center">
+
+        <Tooltip title="Article">
+
+          <Link
+            href={
+              question.article_link
+            }
+            target="_blank"
+          >
+            <Article />
+          </Link>
+
+        </Tooltip>
+
+      </TableCell>
+
+      <TableCell align="center">
+
+        <Tooltip title="YouTube">
+
+          <Link
+            href={
+              question.youtube_link
+            }
+            target="_blank"
+          >
+            <PlayCircle />
+          </Link>
+
+        </Tooltip>
+
+      </TableCell>
+
+      <TableCell align="center">
+
+        <Tooltip title="Practice">
+
+          <Link
+            href={
+              question.leetcode_link
+            }
+            target="_blank"
+          >
+            <Code />
+          </Link>
+
+        </Tooltip>
+
+      </TableCell>
+
       <TableCell>
+
         <Chip
           size="small"
           label={question.level}
@@ -64,42 +118,7 @@ const QuestionRow = ({
               : "error"
           }
         />
-      </TableCell>
 
-      <TableCell>
-        <Stack
-          direction="row"
-          spacing={1}
-        >
-
-          <Link
-            href={
-              question.article_link
-            }
-            target="_blank"
-          >
-            <Article />
-          </Link>
-
-          <Link
-            href={
-              question.youtube_link
-            }
-            target="_blank"
-          >
-            <PlayCircle />
-          </Link>
-
-          <Link
-            href={
-              question.leetcode_link
-            }
-            target="_blank"
-          >
-            <Code />
-          </Link>
-
-        </Stack>
       </TableCell>
 
     </TableRow>

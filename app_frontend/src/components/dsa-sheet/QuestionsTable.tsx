@@ -42,12 +42,20 @@ const QuestionsTable = ({
               Question
             </TableCell>
 
-            <TableCell>
-              Level
+            <TableCell align="center">
+              Article
+            </TableCell>
+
+            <TableCell align="center">
+              YouTube
+            </TableCell>
+
+            <TableCell align="center">
+              Practice
             </TableCell>
 
             <TableCell>
-              Links
+              Level
             </TableCell>
 
           </TableRow>
