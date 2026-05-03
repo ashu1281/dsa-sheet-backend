@@ -79,3 +79,21 @@ export const loginUserService = async (
     token,
   };
 };
+
+export const findUserByEmailService = async (
+  email: string,
+) => {
+  const user = await findUserByEmail(email);
+
+  if (!user) {
+    throw new Error("Invalid email");
+  }
+  return {
+    user: {
+    id: user.id,
+    name: user.name,
+    email: user.email,
+    role: user.role,
+  }
+  };
+};

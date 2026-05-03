@@ -3,6 +3,7 @@ import { Request, Response } from "express";
 import {
   loginUserService,
   registerUserService,
+  findUserByEmailService
 } from "./auth.service";
 
 import { asyncHandler } from "../../utils/asyncHandler";
@@ -57,10 +58,11 @@ export const loginUserController =
 export const meController =
   asyncHandler(
     async (req: Request, res: Response) => {
+      const data = await findUserByEmailService(req?.user?.email ?? "");
       res.status(200).json(
         successResponse(
           "User fetched successfully",
-          req.user
+          data.user
         )
       );
     }
