@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 
 import {
+  Close,
   DarkMode,
   LightMode,
   Logout,
@@ -22,6 +23,8 @@ import {
 
 import {
   useContext,
+  useEffect,
+  useState,
 } from "react";
 
 import {
@@ -45,7 +48,7 @@ const Header = ({
 }: HeaderProps) => {
 
   const navigate = useNavigate();
-
+  const [inputValue, setInputValue] = useState(search);
   const {
     mode,
     toggleTheme,
@@ -61,6 +64,13 @@ const Header = ({
 
     navigate("/login");
   };
+ 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setSearch(inputValue);
+    }, 500)
+    return (() => clearTimeout(timer))
+  }, [inputValue, setSearch])
 
   return (
     <AppBar
@@ -91,7 +101,7 @@ const Header = ({
           }}
         >
           <Typography
-            sx={{fontVariant: "h6", fontWeight: 700}}
+            sx={{ fontVariant: "h6", fontWeight: 700 }}
           >
             {userName}
           </Typography>
@@ -100,15 +110,10 @@ const Header = ({
         <Paper
           sx={{
             flex: 1,
-
             display: "flex",
-
             alignItems: "center",
-
             px: 2,
-
             py: 0.5,
-
             borderRadius: 3,
           }}
         >
@@ -117,16 +122,26 @@ const Header = ({
           <InputBase
             placeholder="Search questions or companies..."
             fullWidth
-            value={search}
+            value={inputValue}
             onChange={(e) =>
-              setSearch(
-                e.target.value
-              )
+              setInputValue(e.target.value)
             }
             sx={{
               ml: 1,
             }}
           />
+
+          {search && (
+            <IconButton
+              size="small"
+              onClick={() => {
+                setSearch("");
+                setInputValue("");
+              }}
+            >
+              <Close fontSize="small" />
+            </IconButton>
+          )}
         </Paper>
 
         <IconButton
