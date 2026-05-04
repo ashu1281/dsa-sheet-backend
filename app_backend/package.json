@@ -9,7 +9,7 @@
     "start": "node dist/server.js",
 
     "migrate": "node-pg-migrate",
-    "migrate:up": "node-pg-migrate up",
+    "migrate:up": "node-pg-migrate up --ssl=true",
     "migrate:down": "node-pg-migrate down"
   },
   "keywords": [],

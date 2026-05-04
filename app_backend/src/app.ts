@@ -11,7 +11,6 @@ const app = express();
 app.use(cors());
 app.use(express.urlencoded({extended:false}))
 app.use(express.json());
-app.use(errorMiddleware);
 
 app.get("/", (_, res) => {
   res.status(200).json({
@@ -33,4 +32,7 @@ app.use(
   authMiddleware,
   progressRouter
 );
+
+app.use(errorMiddleware);
+
 export default app;
