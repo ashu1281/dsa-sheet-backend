@@ -34,6 +34,8 @@ export interface Chapter {
   completedQuestions: number;
 
   questions: Question[];
+
+  isExpanded?: boolean;
 }
 
 export interface LevelProgress {

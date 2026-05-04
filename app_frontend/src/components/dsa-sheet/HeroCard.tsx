@@ -38,7 +38,7 @@ const HeroCard = ({
 
                 overflow: "hidden",
 
-                borderRadius: 5,
+                borderRadius: 1,
 
                 p: 5,
 
@@ -142,24 +142,27 @@ const HeroCard = ({
                     spacing={2}
                     sx={{
                         mt: 4,
-
                         flexWrap: "wrap",
+                        gap:'8px'
                     }}
                 >
 
                     <Chip
                         color="success"
                         label={`Easy ${easy}`}
+                        sx={{margin: "0px !important"}}
                     />
 
                     <Chip
                         color="warning"
                         label={`Medium ${medium}`}
+                        sx={{margin: "0px !important"}}
                     />
 
                     <Chip
                         color="error"
                         label={`Hard ${hard}`}
+                        sx={{margin: "0px !important"}}
                     />
 
                 </Stack>

@@ -197,7 +197,7 @@ const HomePage = () => {
       return chapters
         .map((chapter) => ({
           ...chapter,
-
+          isExpanded: true,
           questions:
             chapter.questions.filter(
               (question) => {

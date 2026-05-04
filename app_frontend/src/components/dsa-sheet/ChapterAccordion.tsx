@@ -35,7 +35,7 @@ const ChapterAccordion = ({
     100;
 
   return (
-    <Accordion>
+    <Accordion key={String(chapter.isExpanded)} defaultExpanded={!!chapter.isExpanded}>
 
       <AccordionSummary
         expandIcon={
