@@ -8,10 +8,17 @@ import { authMiddleware } from "./middlewares/auth.middleware";
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "https://dsa.ashishgaikwad.in",
+      "https://www.ashishgaikwad.in"
+    ],
+    credentials: true,
+  })
+);
 app.use(express.urlencoded({extended:false}))
 app.use(express.json());
-app.use(errorMiddleware);
 
 app.get("/", (_, res) => {
   res.status(200).json({
@@ -33,4 +40,7 @@ app.use(
   authMiddleware,
   progressRouter
 );
+
+app.use(errorMiddleware);
+
 export default app;
