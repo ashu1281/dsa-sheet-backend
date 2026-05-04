@@ -16,7 +16,7 @@ https://dsa.ashishgaikwad.in/
 1) Email: ashish@gmail.com
    Password: Ashish@123
 
-1) Email: ashish2@gmail.com
+2) Email: ashish2@gmail.com
    Password: Ashish2@123
 ```
 
