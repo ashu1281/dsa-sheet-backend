@@ -71,6 +71,7 @@ https://dsa.ashishgaikwad.in/
 src/
 │
 ├── api/
+├── assets/
 ├── components/
 ├── contexts/
 ├── layouts/
@@ -79,6 +80,7 @@ src/
 ├── services/
 ├── theme/
 ├── types/
+├── utils/
 └── App.tsx
 ```
 
@@ -112,6 +114,9 @@ Main Tables:
 - companies
 - question_companies
 - user_question_progress
+
+<img width="663" height="803" alt="image" src="https://github.com/user-attachments/assets/e57b2d02-cd55-488d-a3fc-f6e3cb39ea81" />
+
 
 ---
 
