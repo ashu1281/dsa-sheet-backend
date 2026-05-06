@@ -8,6 +8,9 @@ import {
   Button,
   Card,
   CardContent,
+  CircularProgress,
+  Snackbar,
+  Alert,
   Stack,
   TextField,
   Typography,
@@ -33,11 +36,23 @@ const LoginPage = () => {
   const [password, setPassword] =
     useState("");
 
-  const {setUser} = useContext(AuthContext);
+  const { setUser } =
+    useContext(AuthContext);
+
+  const [loading, setLoading] =
+    useState(false);
+
+  const [toastOpen, setToastOpen] =
+    useState(false);
+
   const handleLogin =
     async () => {
 
       try {
+
+        setToastOpen(true);
+        setLoading(true);
+
         const response =
           await loginUser(
             email,
@@ -48,95 +63,160 @@ const LoginPage = () => {
           response.data.token
         );
 
-        setUser(response.data.user ?? null)
+        setUser(
+          response.data.user ?? null
+        );
+
         navigate("/");
+
       } catch (error) {
+
         console.error(error);
+
+      } finally {
+
+        setLoading(false);
       }
     };
 
   return (
-    <Box
-      sx={{
-        minHeight: "100vh",
-
-        display: "flex",
-
-        alignItems: "center",
-
-        justifyContent: "center",
-
-        px: 2,
-      }}
-    >
-      <Card
+    <>
+      <Box
         sx={{
-          width: "100%",
-          maxWidth: 450,
+          minHeight: "100vh",
+
+          display: "flex",
+
+          alignItems: "center",
+
+          justifyContent: "center",
+
+          px: 2,
         }}
       >
-        <CardContent
+        <Card
           sx={{
-            p: 4,
+            width: "100%",
+            maxWidth: 450,
           }}
         >
-          <Stack spacing={3}>
+          <CardContent
+            sx={{
+              p: 4,
+            }}
+          >
+            <Stack spacing={3}>
 
-            <Typography
-              sx={{
-                fontVariant:'h6',
-                fontWeight: 700,
-                textAlign:'center'
-              }}
-            >
-              Login
-            </Typography>
+              <Typography
+                sx={{
+                  fontSize: "24px",
+                  fontWeight: 700,
+                  textAlign: "center",
+                }}
+              >
+                Login
+              </Typography>
 
-            <TextField
-              label="Email"
-              fullWidth
-              value={email}
-              onChange={(e) =>
-                setEmail(
-                  e.target.value
-                )
-              }
-            />
+              <TextField
+                label="Email"
+                fullWidth
+                value={email}
+                placeholder={"ashish@gmail.com"}
+                onChange={(e) =>
+                  setEmail(
+                    e.target.value
+                  )
+                }
+              />
 
-            <TextField
-              label="Password"
-              type="password"
-              fullWidth
-              value={password}
-              onChange={(e) =>
-                setPassword(
-                  e.target.value
-                )
-              }
-            />
+              <TextField
+                label="Password"
+                type="password"
+                fullWidth
+                value={password}
+                placeholder={"Ashish@123"}
+                onChange={(e) =>
+                  setPassword(
+                    e.target.value
+                  )
+                }
+              />
 
-            <Button
-              variant="contained"
-              size="large"
-              onClick={handleLogin}
-            >
-              Login
-            </Button>
+              <Button
+                variant="contained"
+                size="large"
+                onClick={handleLogin}
+                disabled={loading}
+              >
+                {loading ? (
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 1,
+                    }}
+                  >
+                    <CircularProgress
+                      size={18}
+                      color="inherit"
+                    />
 
-            <Typography
-              sx={{textAlign:'center'}}
-            >
-              Don&apos;t have account?{" "}
+                    <span>
+                      Logging in...
+                    </span>
+                  </Box>
+                ) : (
+                  "Login"
+                )}
+              </Button>
 
-              <Link to="/register">
-                Register
-              </Link>
-            </Typography>
+              <Typography
+                sx={{
+                  textAlign: "center",
+                }}
+              >
+                Don&apos;t have account?{" "}
 
-          </Stack>
-        </CardContent>
-      </Card>
-    </Box>
+                <Link to="/register">
+                  Register
+                </Link>
+              </Typography>
+
+              <Typography
+                sx={{
+                  textAlign: "center",
+                }}
+              >
+                Use placeholders as login credentials.
+              </Typography>
+
+            </Stack>
+          </CardContent>
+        </Card>
+      </Box>
+
+      <Snackbar
+        open={toastOpen}
+        autoHideDuration={120000}
+        onClose={() =>
+          setToastOpen(false)
+        }
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "center",
+        }}
+      >
+        <Alert
+          severity="info"
+          variant="filled"
+          onClose={() =>
+            setToastOpen(false)
+          }
+        >
+          Please wait a few moments. First-time backend connection may take longer.
+        </Alert>
+      </Snackbar>
+    </>
   );
 };
 
